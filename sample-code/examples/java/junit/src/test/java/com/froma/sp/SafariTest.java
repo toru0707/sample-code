@@ -6,10 +6,14 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -34,13 +38,22 @@ public class SafariTest {
      */
     @Before
     public void setUp() throws Exception {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "iPhone Simulator");
-        capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("platformVersion", "7.1");
-        capabilities.setCapability("browserName", "safari");
-        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("deviceName", "iPhone Simulator");
+//        capabilities.setCapability("platformName", "iOS");
+//        capabilities.setCapability("platformVersion", "7.1");
+//        capabilities.setCapability("browserName", "safari");
+//        driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    	System.setProperty("webdriver.chrome.driver", "/Users/toru/chromedriver"); 
+        Map<String, String> mobileEmulation = new HashMap<String, String>();
+        mobileEmulation.put("deviceName", "Google Nexus 5");
+
+        Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        chromeOptions.put("mobileEmulation", mobileEmulation);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+         driver = new ChromeDriver(capabilities);
     }
 
     /**

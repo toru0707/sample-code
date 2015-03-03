@@ -16,6 +16,7 @@ public class ApplyTest extends AbstractTest{
     @Before
     public void setUp() throws Exception {
         driver = FanSpRemoteWebDriverFactory.create();
+        this.baseUrl = "http://froma.com/";
     }
 
     @Test
